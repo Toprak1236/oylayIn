@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Oylama Sitesi</title>
+  <style>
+    .image-box {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Oylama Sayfası</h1>
+  <div id="images"></div>
+
+  <script>
+    // Görsel listesi (resmi proje klasöründe "resimler" klasöründe sakla)
+    const images = [
+      {
+        id: 1,
+        src: "resimler/Arcade Bloom.png", // Kendi resim yolun
+        votes: 0
+      }
+    ];
+
+    function renderImages() {
+      const container = document.getElementById("images");
+      container.innerHTML = "";
+      images.forEach(img => {
+        const box = document.createElement("div");
+        box.className = "image-box";
+        box.innerHTML = `
+          <img src="${img.src}" width="300"><br>
+          <button onclick="vote(${img.id})">Oyla</button>
+          <p>${img.votes} kişi oy verdi</p>
+        `;
+        container.appendChild(box);
+      });
+    }
+
+    function vote(id) {
+      const img = images.find(i => i.id === id);
+      if (img) img.votes += 1;
+      renderImages();
+    }
+
+    renderImages();
+  </script>
+</body>
+</html>
